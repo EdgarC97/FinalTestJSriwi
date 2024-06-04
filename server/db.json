@@ -1,0 +1,50 @@
+{
+  "Flight": [
+    {
+      "id": "",
+      "number": "",
+      "origin": "",
+      "destination": "",
+      "departure": "",
+      "arrival": "",
+      "capacity": ""
+    }
+  ],
+  "Role": [
+    {
+      "id": "01",
+      "name": "Admin"
+    },
+    {
+      "id": "02",
+      "name": "User"
+    }
+    
+  ],
+  "User": [
+    {
+      "id": "1",
+      "name": "Admin",
+      "email": "admin@admin.com",
+      "birthdate": "",
+      "password": "admin123",
+      "role": "Admin"
+    },
+    {
+      "id": "f206",
+      "name": "PEPE",
+      "email": "PEPE@PEPE.COM",
+      "birthdate": "2024-06-28",
+      "password": "PEPE123",
+      "role": "User"
+    }
+  ],
+  "Booking": [
+    {
+      "id": "",
+      "flightId": "",
+      "userId": "",
+      "bookingDate": ""
+    }
+  ]
+}
