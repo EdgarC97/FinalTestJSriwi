@@ -3,8 +3,10 @@ import { navigateTo } from "../../Router";
 import { fetchApi } from "../../helpers/fetch-api";
 import styles from "./login.styles.css";
 
+//Create function scene
 export function LoginScene() {
   const root = document.getElementById("root");
+  //Pintamos en el dom con innerHTML
   root.innerHTML = `
         <div  class="${styles.container}">
             <form class=${styles.loginForm}>
@@ -16,11 +18,14 @@ export function LoginScene() {
             </form>
         </div>
     `;
+  
+  //Select form elements
   const $emailHTML = root.querySelector('input[type="email"]');
   const $passHTML = root.querySelector('input[type="password"]');
 
   const $myForm = root.getElementsByTagName("form")[0];
 
+  //Event listener of submit
   $myForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -28,7 +33,7 @@ export function LoginScene() {
       alert("Rellena todos los campos");
     }
 
-    //fetch
+    //Fetch for extract db.json info
 
     const users = await fetchApi("http://localhost:3000/User");
     const user = users.find(
@@ -36,6 +41,7 @@ export function LoginScene() {
         user.email === $emailHTML.value &&
         user.password === $passHTML.value
     );
+    //Create the tolen
     if (user) {
       const token = Math.random().toString(36).substring(2);
       const role = user.role;
@@ -47,6 +53,7 @@ export function LoginScene() {
     }
   });
 
+  //Logic for register button
   const registerButton = document.getElementById("register-button");
   registerButton.addEventListener("click", () => {
     navigateTo("/register");

@@ -1,31 +1,32 @@
-.nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 100px;
-    background-color: rgb(133, 24, 24);
+.nav {
+  display: flex;
+  align-items: center;
+  height: 85px;
+  background-color: rgb(133, 24, 24);
+  justify-content: center;
 }
 
-.nav > ul{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: 30px;
-    list-style: none;
+.nav > ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  list-style: none;
 }
 
 .nav > .btn {
-    background-color: transparent;
-    border: none;
-    padding: 10px;
-    color: white;
-    cursor: pointer;
-    font-size: 18px;
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 25px;
 }
 
 .nav > ul > li > a {
-    text-decoration: none;
-    padding: 10px;
-    color: white;
-    font-size: 18px;
+  text-decoration: none;
+  padding: 10px;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
 }

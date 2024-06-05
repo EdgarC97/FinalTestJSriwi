@@ -1,6 +1,7 @@
 import { routes } from "./routes";
 import { DashboardLayout } from "./components/dashboard/dashboard-layout.component";
 
+//Export function 
 export function Router() {
   const path = window.location.pathname;
 

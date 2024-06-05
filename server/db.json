@@ -1,13 +1,13 @@
 {
   "Flight": [
     {
-      "id": "",
-      "number": "",
-      "origin": "",
-      "destination": "",
-      "departure": "",
-      "arrival": "",
-      "capacity": ""
+      "number": "2023",
+      "origin": "BARRANQUILLA",
+      "destination": "MEDELLIN",
+      "departure": "2024-06-10",
+      "arrival": "2024-06-25",
+      "capacity": "51",
+      "id": "c319"
     }
   ],
   "Role": [
@@ -19,7 +19,6 @@
       "id": "02",
       "name": "User"
     }
-    
   ],
   "User": [
     {
