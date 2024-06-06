@@ -9,7 +9,7 @@ export function DashboardLayout(pageContent, logic) {
   root.innerHTML = `
     <nav class=${styles.nav}>
         <ul>
-            <li><a href="/home">Flights</a></li>
+            <li id="flights-link"><a href="#">Flights</a></li>
             <li><a href="/order">Bookings</a></li>
         </ul>
         ${logout}
@@ -20,10 +20,16 @@ export function DashboardLayout(pageContent, logic) {
   logic();
 
   const $logOut = root.querySelector("#logout");
+  const $flightsLink = root.querySelector("#flights-link");
 
   $logOut.addEventListener("click", () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     navigateTo("/login");
+  });
+
+  $flightsLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    navigateTo("/flights");
   });
 }

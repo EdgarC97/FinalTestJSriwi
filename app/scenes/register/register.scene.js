@@ -25,6 +25,9 @@ export function RegisterScene() {
         </div>
     `;
 
+   // Regex for email validation
+   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
   // Extract every element in form
   const $nameHtml = root.querySelector('input[type="text"]');
   const $emailHtml = root.querySelector('input[type="email"]');
@@ -46,6 +49,13 @@ export function RegisterScene() {
       alert("Please fill all fields");
       return;
     }
+
+    // Check if email is valid
+  if (!emailRegex.test($emailHtml.value)) {
+    alert("Por favor, ingresa un correo electrónico válido");
+    return;
+  }
+
     //fetch for post in db.json
     const userCreated = await fetchApi("http://localhost:3000/User", {
       method: "POST",

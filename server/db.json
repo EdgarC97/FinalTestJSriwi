@@ -6,8 +6,17 @@
       "destination": "MEDELLIN",
       "departure": "2024-06-10",
       "arrival": "2024-06-25",
-      "capacity": "51",
+      "capacity": 49,
       "id": "c319"
+    },
+    {
+      "id": "b559",
+      "number": "5050",
+      "origin": "MEDELLIN",
+      "destination": "CARTAGENA",
+      "departure": "2024-06-19",
+      "arrival": "2024-06-26",
+      "capacity": 54
     }
   ],
   "Role": [
@@ -44,6 +53,24 @@
       "flightId": "",
       "userId": "",
       "bookingDate": ""
+    },
+    {
+      "id": "2b20",
+      "flightId": "c319",
+      "userId": "User",
+      "bookingDate": 1717691309050
+    },
+    {
+      "id": "1a50",
+      "flightId": "c319",
+      "userId": "User",
+      "bookingDate": 1717691322507
+    },
+    {
+      "id": "ffd1",
+      "flightId": "c319",
+      "userId": "User",
+      "bookingDate": 1717694307097
     }
   ]
 }

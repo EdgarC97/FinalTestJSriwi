@@ -9,7 +9,7 @@ export function DashboardScene() {
   createFlight = `<button id="create" class="create-class ${localStorage.getItem('role') === 'User'? styles.hidden: ''}">Create Flight</button>`;
 
   const pageContent = ` 
-    <h1>Vuelos actuales</h1>
+    <h1 class="${styles.title}">Vuelos actuales</h1>
     <div id="all-flights"></div>
     ${createFlight}
     `;
@@ -34,7 +34,7 @@ export function DashboardScene() {
                 <p>Arrival: ${flight.arrival}</p>
                 <p>Capacity: ${flight.capacity}</p>
                 <button class="edit-class ${localStorage.getItem('role') === 'User'? styles.hidden: ''}" data-edit-id="${flight.id}">Edit</button>
-                <button class="edit-class ${localStorage.getItem('role') === 'User'? styles.hidden: ''}" data-delete-id="${flight.id}">Delete</button>
+                <button class="delete-class ${localStorage.getItem('role') === 'User'? styles.hidden: ''}" data-delete-id="${flight.id}">Delete</button>
                 <button class="reserve-class ${localStorage.getItem('role') === 'Admin'? styles.hidden: ''}" data-reserve-id="${flight.id}">Reserve</button>
                 
             </div>
@@ -52,37 +52,62 @@ export function DashboardScene() {
       });
     });
 
-    //Logic to reserve a flight
-    const reserveFlight = async (flightId) => {
-      const confirmation = confirm(
-        "¿Estás seguro que deseas reservar este vuelo?"
-      );
-      if (confirmation) {
-        try {
-          const response = await fetchApi(`http://localhost:3000/Booking`, {
-            method: "POST",
-            headers: {
-              "Content-type": "application/json",
-            },
-            body: JSON.stringify({
-              flightId: flightId,
-              userId: role,
-              bookingDate: Date.now(),
-            }),
-          });
-          if (response) {
-            console.log("Se reservó el vuelo correctamente");
-            navigateTo("/dashboard");
-          } else {
-            console.log("Error al reservar el vuelo");
-          }
-        } catch (error) {
-          console.log("ERROR", error);
-        }
-      } else {
-        console.log("El usuario canceló la reservación");
+//Logic to reserve a flight
+const reserveFlight = async (flightId) => {
+  const confirmation = confirm("¿Estás seguro que deseas reservar este vuelo?");
+  if (confirmation) {
+    try {
+      // Fetch the current flight data
+      const flightResponse = await fetch(`http://localhost:3000/Flight/${flightId}`);
+      const flightData = await flightResponse.json();
+
+      // Check if the flight is full
+      if (flightData.capacity <= 0) {
+        console.log("Lo sentimos, este vuelo está lleno.");
+        return;
       }
-    };
+
+      // Decrease the flight capacity by 1
+      const updatedFlightData = {
+        ...flightData,
+        capacity: flightData.capacity - 1,
+      };
+
+      // Update the flight data in the database
+      await fetchApi(`http://localhost:3000/Flight/${flightId}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(updatedFlightData),
+      });
+
+      // Create the booking
+      const response = await fetchApi(`http://localhost:3000/Booking`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          flightId: flightId,
+          userId: role,
+          bookingDate: Date.now(),
+        }),
+      });
+
+      if (response) {
+        console.log("Se reservó el vuelo correctamente");
+        navigateTo("/dashboard");
+      } else {
+        console.log("Error al reservar el vuelo");
+      }
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  } else {
+    console.log("El usuario canceló la reservación");
+  }
+};
 
     //Logic to edit a flight
     const $editBtns = document.getElementsByClassName("edit-class");

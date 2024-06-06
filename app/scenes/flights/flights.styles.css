@@ -4,10 +4,6 @@
     margin-top: 10px;
 }
 
-.hidden {
-    display: none;
-}
-
 .title{
     display: flex;
     align-items: center;
